@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="{% url 'edit_profile' %}" class='btn btn-info px-4 m-3'>Edit Profile</a>
+{{details}}
+<div class="container">
+    <h1 class='text-success text-center m-3'> Total Cars Bought: {{details.cars_bought.all | length}}</h1>
+    <div class="row bg-dark">
+        {% for car in details.cars_bought.all %}
+      <div class="col-3 m-3 ">
+
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+
+            <h5 class="card-title text-center">{{car.carName}}</h5>
+            <p class="card-text">
+              price:- {{car.carPrice}} USD
+            </p>
+            <p class="card-text">
+              <strong>Brand : </strong>{{car.carBrand}}
+            </p>
+          </div>
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+
+{% endblock%}

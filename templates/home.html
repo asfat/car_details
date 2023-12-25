@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+
+<div class="container row mt-5 ms-3">
+  <p class="col-6 text-center">
+    <strong>Welcome to CarPoint!</strong> <br /><br />
+    Your Premier Destination for Quality Cars!Discover a diverse range of
+    top-tier car brands at CarPoint, where your ideal vehicle is just a click
+    away. Our user-friendly platform ensures a seamless browsing experience,
+    allowing you to explore, compare, and find the perfect car that aligns with
+    your preferences. With a commitment to transparency and quality, CarPoint is
+    your trusted partner in making informed and confident car-buying decisions.
+    Ready to embark on an unparalleled driving experience? Start your journey
+    with CarPoint today!
+  </p>
+  <img class="col-6" src="{% static 'download.jpeg' %}" alt="an img" />
+</div>
+
+<div class="container row text-center">
+  <h1 class="mt-5">All categories</h1>
+  {% for cat in categories %}
+  <a href="" class="col-2 btn btn-warning m-3">{{cat}}</a>
+  {% endfor %}
+</div>
+<div class='container d-flex align-items-center'>
+    <button type="button" class="btn btn-primary ms-5 mt-3" disabled>All Cars: </button>
+    <span class=' ms-2 text-success fw-bold fs-5'>{{allCar | length}} Resuls Found</span>
+</div>
+<div class="container">
+
+  <div class="row">
+    {% for car in allCar %}
+    <div class="col-3 m-3">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+        <img src="{{car.carImg.url}}" class="card-img-top" alt="...">
+          <h5 class="card-title text-center">{{car.carName}}</h5>
+          <p class="card-text">
+            price:- {{car.carPrice}} USD
+          </p>
+          <p class="card-text">
+            <strong>Brand : </strong>{{car.carBrand}}
+          </p>
+          <a href="#" class="btn btn-primary">View Details</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endblock %}

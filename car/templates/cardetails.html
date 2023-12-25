@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class='container row d-flex justify-content-center align-items-center mt-5'>
+    <img class='col-6' src="{{car.carImg.url}}" alt="Car Img">
+    <div class='col-6 d-flex justify-content-center px-5'>
+        <div class="card text-center" style="width: 18rem;">
+            <div class="card-body bg-info">
+              <h5 class="card-title ">Car Name: - {{car.carName}}</h5>
+              <h5 class="card-title ">Price: - {{car.carPrice}} USD</h5>
+              <h5 class="card-title ">In Stock: {{car.carQuantity}} PC</h5>
+              <p class="card-text">{{car.carDescription}}</p>
+              <p class="card-text">{{car.carBrand}}</p>
+              {% if user.is_authenticated %}
+              <a href="{% url 'carDetails' car.id %}" class="btn btn-warning">BUY NOW</a>
+              {% endif %}
+            </div>
+          </div>
+    </div>
+</div>
+<div class="card m-2">
+  <h5 class="p-3">Total Comments : {{comments | length}}</h5>
+  {% for comment in comments %}
+<div class="card-body border m-2">
+      <p><b>{{comment.name}}</b> {{comment.created_on}}</p>
+      <p>{{comment.body}}</p>
+  </div>
+  {% endfor %}
+</div>
+<div class="card m-2">
+  <div class="card-body">
+      <form method="post">
+          <h1>Add Comment</h1>
+          {% csrf_token %}
+          {{comments_form | crispy}}
+
+          <button class="btn btn-warning">Submit</button>
+  </div>
+</div>
+{% endblock %}
